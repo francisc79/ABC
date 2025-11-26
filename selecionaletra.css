@@ -1,0 +1,129 @@
+body {
+    background-color: #ffffff;
+    /* Evita seleção de texto ao tocar rápido */
+    user-select: none; 
+    -webkit-user-select: none;
+}
+
+/* Área superior */
+#area-jogo {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+/* A Letra Grande (Alvo) */
+.letra-destaque {
+    color: #ffffff;
+    background-color: #b90000;
+    box-shadow: 0 6px 0px #2ddede;
+    
+    font-size: 80px; /* Tamanho base */
+    font-weight: 900;
+    font-family: Arial, sans-serif;
+    
+    display: inline-flex; /* Centraliza melhor */
+    justify-content: center;
+    align-items: center;
+    
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    
+    transition: all 0.2s;
+}
+/* Tela de Início que cobre tudo */
+.tela-cheia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #87CEEB; /* Azul céu */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Fica por cima de tudo */
+}
+
+.titulo-jogo {
+    color: white;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+}
+#btn-comecar
+{color: #ffffff;
+    background-color: #0bab2e;
+    width: 200px;
+    height: 50px;
+    border-color: #505050;
+}
+/* Animação para o botão pular */
+.pulsante {
+    animation: pulsar 1.5s infinite;
+    font-size: 2rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+}
+
+@keyframes pulsar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+/* --- GRID RESPONSIVO (Onde a mágica acontece) --- */
+#grid-alfabeto {
+    display: grid;
+    /* Cria colunas automáticas com largura mínima de 60px (celular) ou mais */
+    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+    gap: 10px; /* Espaço entre os botões */
+    max-width: 800px; /* Não deixa ficar muito largo em tablets grandes */
+    margin: 0 auto; /* Centraliza o grid */
+}
+
+/* O estilo de cada botão de letra */
+.letra-card {
+    background-color: #1ba8dfff;
+    color: #333;
+    font-size: 2rem; /* Texto grande */
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 15px 0;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #ced4da; /* Efeito de botão 3D */
+    transition: transform 0.1s, background-color 0.2s;
+    
+    /* Melhoria para toque em mobile */
+    touch-action: manipulation; 
+}
+
+/* Efeito ao clicar/tocar */
+.letra-card:active {
+    transform: translateY(4px); /* Botão desce */
+    box-shadow: 0 0 0 #ced4da; /* Sombra some */
+}
+
+/* RESPONSIVIDADE: Ajustes específicos para telas pequenas */
+@media (max-width: 500px) {
+    .letra-destaque {
+        font-size: 60px;
+        width: 90px;
+        height: 90px;
+    }
+    
+    #grid-alfabeto {
+        /* No celular muito pequeno, força colunas menores para caber mais */
+        grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+        gap: 8px;
+    }
+
+    .letra-card {
+        font-size: 1.5rem;
+        padding: 10px 0;
+    }
+}
