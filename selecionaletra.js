@@ -170,11 +170,11 @@ gridAlfabeto.addEventListener("click", function (event) {
             // 2. Vibração (apenas Android/Mobile compatível)
             if (navigator.vibrate) navigator.vibrate(50); 
             
-            // 3. Restaura a cor original após 300ms
+            // 3. Volta explicitamente para o azul original após 500ms
             setTimeout(() => {
-                elementoClicado.style.backgroundColor = '';
+                elementoClicado.style.backgroundColor = '#1ba8dfff';
                 elementoClicado.style.pointerEvents = '';
-            }, 300);
+            }, 500);
         }
     }
 });
