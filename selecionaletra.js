@@ -83,10 +83,10 @@ function iniciarJogo() {
     const cards = document.querySelectorAll('.letra-card');
     cards.forEach(card => {
         card.style.visibility = 'visible';       // Torna visível
-        card.style.backgroundColor = '#79b8dfff';  // Cor original (cinza claro)
-        card.style.color = '#333';               // Cor do texto original
-        card.style.pointerEvents = 'auto';       // Reativa o clique
-        card.style.transform = 'none';           // Remove transformações residuais
+        card.style.backgroundColor = '';             // Restaura a cor definida no CSS
+        card.style.color = '';                      // Restaura a cor definida no CSS
+        card.style.pointerEvents = '';             // Restaura a interação padrão
+        card.style.transform = '';                 // Remove transformações residuais
     });
 
     // 4. Controle de Áudio (Reinício)
@@ -125,7 +125,7 @@ function finalizarJogo() {
     
     // Para a música de fundo e toca a vitória
     if(somFundo) somFundo.pause();
-    if(somVitoria) somVitoria.play();
+    if(somVitoria) somVitoria.play().catch(e => console.log('Áudio de vitória indisponível:', e));
 }
 
 
@@ -145,7 +145,7 @@ gridAlfabeto.addEventListener("click", function (event) {
             // --- ACERTO ---
             
             // 1. Som de acerto (Clone permite tocar sons rápidos sobrepostos)
-            if(somAcerto) somAcerto.cloneNode(true).play().catch(e => {});
+            if(somAcerto) somAcerto.cloneNode(true).play().catch(() => {});
 
             // 2. Feedback Visual (Verde)
             elementoClicado.style.backgroundColor = '#18e448ff'; // Verde claro bootstrap
@@ -165,13 +165,15 @@ gridAlfabeto.addEventListener("click", function (event) {
             
             // 1. Feedback Visual (Vermelho)
             elementoClicado.style.backgroundColor = '#e70c1eff';
+            elementoClicado.style.pointerEvents = 'none';
             
             // 2. Vibração (apenas Android/Mobile compatível)
             if (navigator.vibrate) navigator.vibrate(50); 
             
             // 3. Restaura a cor original após 300ms
             setTimeout(() => {
-                elementoClicado.style.backgroundColor = '#e9ecef';
+                elementoClicado.style.backgroundColor = '';
+                elementoClicado.style.pointerEvents = '';
             }, 300);
         }
     }
